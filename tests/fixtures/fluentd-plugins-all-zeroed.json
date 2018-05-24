@@ -1,0 +1,245 @@
+{
+   "plugins" : [
+      {
+         "config" : {
+            "port" : "24224",
+            "@id" : "fluentd-global-input",
+            "@type" : "forward"
+         },
+         "plugin_id" : "fluentd-global-input",
+         "plugin_category" : "input",
+         "type" : "forward",
+         "retry_count" : null,
+         "output_plugin" : false
+      },
+      {
+         "plugin_category" : "input",
+         "plugin_id" : "object:2af1cc78916c",
+         "config" : {
+            "@type" : "debug_agent",
+            "port" : "24230",
+            "bind" : "127.0.0.1"
+         },
+         "output_plugin" : false,
+         "retry_count" : null,
+         "type" : "debug_agent"
+      },
+      {
+         "config" : {
+            "bind" : "0.0.0.0",
+            "port" : "24220",
+            "@id" : "fluentd-monitoring",
+            "@type" : "monitor_agent"
+         },
+         "plugin_category" : "input",
+         "plugin_id" : "fluentd-monitoring",
+         "type" : "monitor_agent",
+         "output_plugin" : false,
+         "retry_count" : null
+      },
+      {
+         "plugin_category" : "output",
+         "plugin_id" : "object:2af1cc65bc18",
+         "config" : {
+            "@type" : "relabel",
+            "@label" : "@ASGARD"
+         },
+         "retry" : {},
+         "retry_count" : 0,
+         "output_plugin" : true,
+         "type" : "relabel"
+      },
+      {
+         "plugin_id" : "object:2af1cc64e784",
+         "plugin_category" : "output",
+         "retry" : {},
+         "config" : {
+            "@label" : "@ASGARD",
+            "@type" : "relabel"
+         },
+         "output_plugin" : true,
+         "retry_count" : 0,
+         "type" : "relabel"
+      },
+      {
+         "config" : {
+            "@label" : "@ASGARDOK",
+            "@type" : "relabel"
+         },
+         "retry" : {},
+         "plugin_category" : "output",
+         "plugin_id" : "object:2af1cc19894c",
+         "type" : "relabel",
+         "retry_count" : 0,
+         "output_plugin" : true
+      },
+      {
+         "config" : {
+            "@type" : "record_transformer"
+         },
+         "plugin_id" : "object:2af1cc643730",
+         "plugin_category" : "filter",
+         "type" : "record_transformer",
+         "retry_count" : null,
+         "output_plugin" : false
+      },
+      {
+         "config" : {
+            "format" : "json",
+            "reserve_data" : "false",
+            "@type" : "parser",
+            "reserve_time" : "true",
+            "key_name" : "log",
+            "emit_invalid_record_to_error" : "true"
+         },
+         "plugin_id" : "object:2af1cc5ac27c",
+         "plugin_category" : "filter",
+         "type" : "parser",
+         "output_plugin" : false,
+         "retry_count" : null
+      },
+      {
+         "plugin_category" : "output",
+         "plugin_id" : "object:2af1cc1e3848",
+         "config" : {
+            "@type" : "copy"
+         },
+         "retry_count" : 0,
+         "output_plugin" : false,
+         "type" : "copy"
+      },
+      {
+         "type" : "flowcounter",
+         "retry_count" : 0,
+         "output_plugin" : true,
+         "retry" : {},
+         "config" : {
+            "aggregate" : "tag",
+            "@label" : "@ASGARD",
+            "tag" : "counts.ok.1m",
+            "count_keys" : "*",
+            "output_style" : "tagged",
+            "@type" : "flowcounter",
+            "unit" : "minute"
+         },
+         "plugin_id" : "object:2af1cc115808",
+         "plugin_category" : "output"
+      },
+      {
+         "plugin_id" : "object:2af1cc0eb65c",
+         "plugin_category" : "output",
+         "retry" : {},
+         "config" : {
+            "@label" : "@ASGARD",
+            "@type" : "relabel"
+         },
+         "retry_count" : 0,
+         "output_plugin" : true,
+         "type" : "relabel"
+      },
+      {
+         "type" : "copy",
+         "retry_count" : 0,
+         "output_plugin" : false,
+         "config" : {
+            "@type" : "copy"
+         },
+         "plugin_category" : "output",
+         "plugin_id" : "object:2af1cc0e3ee8"
+      },
+      {
+         "type" : "flowcounter",
+         "output_plugin" : true,
+         "retry_count" : 0,
+         "retry" : {},
+         "config" : {
+            "aggregate" : "tag",
+            "@label" : "@ASGARD",
+            "tag" : "counts.errors.1m",
+            "count_keys" : "*",
+            "@type" : "flowcounter",
+            "output_style" : "tagged",
+            "unit" : "minute"
+         },
+         "plugin_id" : "object:2af1cc0e20d4",
+         "plugin_category" : "output"
+      },
+      {
+         "type" : "relabel",
+         "output_plugin" : true,
+         "retry_count" : 0,
+         "config" : {
+            "@type" : "relabel",
+            "@label" : "@ASGARD"
+         },
+         "retry" : {},
+         "plugin_category" : "output",
+         "plugin_id" : "object:2af1cc0d6860"
+      },
+      {
+         "config" : {
+            "@type" : "copy",
+            "@id" : "app-logs"
+         },
+         "plugin_category" : "output",
+         "plugin_id" : "app-logs",
+         "type" : "copy",
+         "output_plugin" : false,
+         "retry_count" : 0
+      },
+      {
+         "retry_count" : 0,
+         "buffer_total_queued_size" : 0,
+         "output_plugin" : true,
+         "retry" : {},
+         "buffer_queue_length" : 0,
+         "config" : {
+            "host" : "asgard-log-ingest-rabbitmq.service.sieve.com.br",
+            "password" : "xxxxxx",
+            "@type" : "amqp",
+            "user" : "fluentd",
+            "vhost" : "fluentd",
+            "passive" : "true",
+            "@id" : "app-logs-out-rabbitmq",
+            "port" : "5672",
+            "exchange" : "fluentd-logs"
+         },
+         "plugin_id" : "app-logs-out-rabbitmq",
+         "plugin_category" : "output",
+         "type" : "amqp"
+      },
+      {
+         "retry" : {},
+         "config" : {
+            "@type" : "rewrite_tag_filter"
+         },
+         "plugin_id" : "object:2af1cc6733cc",
+         "plugin_category" : "output",
+         "type" : "rewrite_tag_filter",
+         "output_plugin" : true,
+         "retry_count" : 0
+      },
+      {
+         "retry_count" : 0,
+         "output_plugin" : true,
+         "type" : "relabel",
+         "plugin_id" : "object:2af1cc665970",
+         "plugin_category" : "output",
+         "retry" : {},
+         "config" : {
+            "@type" : "relabel",
+            "@label" : "@ASGARDERROR"
+         }
+      },
+      {
+         "plugin_category" : "filter",
+         "plugin_id" : "object:2af1cc6bad44",
+         "config" : {
+            "@type" : "record_transformer"
+         },
+         "retry_count" : null,
+         "output_plugin" : false,
+         "type" : "record_transformer"
+      }
+   ]
+}

@@ -1,0 +1,3 @@
+Flask==0.12
+requests==2.13.0
+asgard-api-sdk==0.2.0
