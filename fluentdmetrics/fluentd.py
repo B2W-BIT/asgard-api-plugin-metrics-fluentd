@@ -1,4 +1,8 @@
 from urllib.parse import urlparse
+from datetime import datetime
+
+import pytz
+from dateutil.parser import parse
 
 from asgard.sdk.options import get_option
 import requests
@@ -8,6 +12,7 @@ def get_fluentd_server_addresses():
 
 def get_fluentd_plugin_info(plugin_id):
     result = {}
+    now  =  datetime.now(tz=pytz.utc)
     for addr in get_fluentd_server_addresses():
         server_ip = urlparse(addr).hostname
         result[server_ip] = {}
@@ -15,5 +20,8 @@ def get_fluentd_plugin_info(plugin_id):
         response_data = response.json()
         plugin_data = [info for info in response_data['plugins'] if info['plugin_id'] == plugin_id]
         if plugin_data:
+            if plugin_data[0]['retry']:
+                plugin_data[0]['retry_start_min'] = (parse(plugin_data[0]['retry']['start']) - now).total_seconds() / 60
+                plugin_data[0]['retry_next_min'] = (parse(plugin_data[0]['retry']['next_time']) - now).total_seconds() / 60
             result[server_ip] = plugin_data[0]
     return result
