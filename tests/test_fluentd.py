@@ -36,6 +36,8 @@ class FluentdTest(unittest.TestCase):
             self.assertEqual(plugin_info['10.0.0.4']["output_plugin"], True)
             self.assertEqual(plugin_info['10.0.0.4']["retry"], {})
             self.assertEqual(plugin_info['10.0.0.4']["buffer_queue_length"], 0)
+            self.assertEqual(plugin_info['10.0.0.4']["retry_start_min"], 0)
+            self.assertEqual(plugin_info['10.0.0.4']["retry_next_min"], 0)
 
     def test_get_infos_one_plugin_multiple_servers(self):
         with RequestsMock() as rsps, \

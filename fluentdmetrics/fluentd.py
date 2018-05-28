@@ -23,5 +23,9 @@ def get_fluentd_plugin_info(plugin_id):
             if plugin_data[0]['retry']:
                 plugin_data[0]['retry_start_min'] = (parse(plugin_data[0]['retry']['start']) - now).total_seconds() / 60
                 plugin_data[0]['retry_next_min'] = (parse(plugin_data[0]['retry']['next_time']) - now).total_seconds() / 60
+            else:
+                plugin_data[0]['retry_start_min'] = 0
+                plugin_data[0]['retry_next_min'] = 0
+
             result[server_ip] = plugin_data[0]
     return result
