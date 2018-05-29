@@ -4,7 +4,7 @@ import os
 import json
 from freezegun import freeze_time
 
-from fluentdmetrics.fluentd import get_fluentd_plugin_info
+from fluentdmetrics.fluentd import get_fluentd_plugin_info, get_fluentd_summary_plugin_info
 
 from responses import RequestsMock
 from tests import get_fixture
@@ -103,3 +103,22 @@ class FluentdTest(unittest.TestCase):
             plugin_info = get_fluentd_plugin_info("app-logs-out-rabbitmq-do-not-exist")
             self.assertTrue("10.0.0.4" in plugin_info)
             self.assertEqual({}, plugin_info['10.0.0.4'])
+
+    def test_get_info_summary_for_one_plugin(self):
+        """
+        Retorna os dados de um plugin, já sumarizando todos os nós do fluentd onde
+        esse plugin está rodando
+        """
+        buffered_to_disk_fixture = get_fixture("./fixtures/fluentd-plugins-some-buffers-sent-to-disk.json")
+        with RequestsMock() as rsps, \
+                mock.patch.dict(os.environ,
+                                HOLLOWMAN_FLUENTD_ADDRESS_0="http://10.0.0.4:24224",
+                                HOLLOWMAN_FLUENTD_ADDRESS_1="http://10.0.0.5:24224"):
+            rsps.add(method="GET", url="http://10.0.0.4:24224/api/plugins.json", body=json.dumps(self.plugin_info_with_retries_fixture), status=200)
+            rsps.add(method="GET", url="http://10.0.0.5:24224/api/plugins.json", body=json.dumps(buffered_to_disk_fixture), status=200)
+            plugin_info = get_fluentd_summary_plugin_info("app-logs-out-rabbitmq")
+
+            self.assertEqual(plugin_info["retry_count"], 7)
+            self.assertEqual(plugin_info["buffer_queue_length"], 3)
+            self.assertEqual(plugin_info["buffer_total_queued_size"], 192640 + 173834) # Soma do buffer queue size de cada fluentd server
+

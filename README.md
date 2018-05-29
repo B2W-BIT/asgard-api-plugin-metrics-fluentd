@@ -45,8 +45,6 @@ de monitoring do fluentd, então fará o acesso em http://<IP>:<PORTA>/api/plugi
       "retry_count": each(<IP>).sum(retry_count),
       "buffer_queue_length": each(<IP>).sum(buffer_queue_length),
       "buffer_total_queued_size": each(<IP>).sum(buffer_total_queued_size),
-      "retry_start_min: each(<IP>).max(now - retry_start), # Pegamos o plugin começou a falhar primeiro.
-      "retry_next_min_<IP>: each(<IP>).min(retry_next - now), # Pegamos o plugin que será o primeiro a re-tentar.
     }
     ```
 
