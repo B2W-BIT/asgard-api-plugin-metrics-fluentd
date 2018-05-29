@@ -55,7 +55,6 @@ class ApiRoutesTest(unittest.TestCase):
         """
         Conferimos que as métricas são entregues separadas por server IP
         """
-        self.maxDiff = None
         plugins_response_fixture = get_fixture("./fixtures/fluentd-plugins-flush-failed-retrying.json")
         client = self.application.test_client()
         self.get_fluentd_server_addresses_mock.return_value = ["http://10.0.0.4:24224", "http://10.0.0.5:24224"]
@@ -78,6 +77,29 @@ class ApiRoutesTest(unittest.TestCase):
                  "buffer_queue_length_10.0.0.5" : 0,
                  "retry_count_10.0.0.5" : 5,
                  "buffer_total_queued_size_10.0.0.5" : 192640,
+            }
+            response_json = json.loads(response.data)
+            self.assertDictEqual(expected_plugin_data, response_json)
+
+    def test_read_plugin_info_summary(self):
+        """
+        Conferimos que podemos fazer a sumarização dos dados de um plugin
+        """
+        buffered_to_disk_fixture = get_fixture("./fixtures/fluentd-plugins-some-buffers-sent-to-disk.json")
+        plugin_with_retries_fixture = get_fixture("./fixtures/fluentd-plugins-flush-failed-retrying.json")
+        client = self.application.test_client()
+        self.get_fluentd_server_addresses_mock.return_value = ["http://10.0.0.4:24224", "http://10.0.0.5:24224"]
+
+        with RequestsMock() as rsps, \
+                freeze_time("2018-05-24 17:45:00 +0000"):
+            rsps.add(method="GET", url="http://10.0.0.4:24224/api/plugins.json", body=json.dumps(buffered_to_disk_fixture), status=200)
+            rsps.add(method="GET", url="http://10.0.0.5:24224/api/plugins.json", body=json.dumps(plugin_with_retries_fixture), status=200)
+            response = client.get("/retry_count/app-logs-out-rabbitmq")
+            self.assertEqual(200, response.status_code)
+            expected_plugin_data = {
+                "retry_count": 7,
+                "buffer_queue_length": 3,
+                "buffer_total_queued_size": 192640 + 173834,
             }
             response_json = json.loads(response.data)
             self.assertDictEqual(expected_plugin_data, response_json)

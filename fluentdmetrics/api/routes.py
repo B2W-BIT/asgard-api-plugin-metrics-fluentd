@@ -34,6 +34,6 @@ def one_plugin(plugin_id):
 @fluentd_metrics_blueprint.route('/retry_count/<string:plugin_id>')
 def retry_count(plugin_id):
     return Response(
-        json.dumps({}),
+        json.dumps(fluentd.get_fluentd_summary_plugin_info(plugin_id)),
         mimetype='application/json'
     )
