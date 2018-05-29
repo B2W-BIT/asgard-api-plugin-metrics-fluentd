@@ -1,5 +1,4 @@
 asgard-api-sdk==0.2.0
 Flask==0.12
-freezegun==0.3.10
 python-dateutil==2.7.3
 requests==2.13.0
