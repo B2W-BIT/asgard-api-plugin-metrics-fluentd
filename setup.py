@@ -20,6 +20,13 @@ setup(
     ],
 
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
+    install_requires = [
+        "asgard-api-sdk==0.2.0",
+        "python-dateutil==2.7.3",
+        "requests==2.13.0",
+        "freezegun==0.3.10",
+        "pytz==2018.04",
+    ],
 
     entry_points={
         'asgard_api_metrics_mountpoint': [
