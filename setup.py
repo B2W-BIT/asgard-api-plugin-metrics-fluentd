@@ -23,7 +23,7 @@ setup(
     install_requires = [
         "asgard-api-sdk==0.2.0",
         "python-dateutil==2.7.3",
-        "requests==2.13.0",
+        "requests>=2.0.0",
         "freezegun==0.3.10",
         "pytz==2018.04",
     ],
