@@ -6,7 +6,7 @@ here = path.abspath(path.dirname(__file__))
 
 setup(
     name='asgard-api-plugin-metrics-fluentd',
-    version='0.1.0-rc1',
+    version='0.1.0-rc2',
 
     description='Asgard API endpoints to get Fluentd metrics',
     long_description="Plugin para a Asgard API e que fornece métricas do cluster de Fluentd",
