@@ -188,7 +188,11 @@
          }
       },
       {
-         "retry" : {},
+         "retry" : {
+            "start" : "2018-05-24 17:44:00 +0000",
+            "next_time" : "2018-05-24 17:50:00 +0000",
+            "steps" : 4
+         },
          "output_plugin" : true,
          "buffer_queue_length" : 3,
          "config" : {
@@ -202,7 +206,7 @@
             "port" : "5672",
             "@type" : "amqp"
          },
-         "retry_count" : 0,
+         "retry_count" : 2,
          "buffer_total_queued_size" : 173834,
          "plugin_id" : "app-logs-out-rabbitmq",
          "plugin_category" : "output",

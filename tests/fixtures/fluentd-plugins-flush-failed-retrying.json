@@ -204,8 +204,8 @@
          "plugin_id" : "app-logs-out-rabbitmq",
          "buffer_total_queued_size" : 192640,
          "retry" : {
-            "start" : "2018-05-24 17:44:58 +0000",
-            "next_time" : "2018-05-24 17:45:29 +0000",
+            "start" : "2018-05-24 17:44:00 +0000",
+            "next_time" : "2018-05-24 17:50:00 +0000",
             "steps" : 4
          },
          "buffer_queue_length" : 0,

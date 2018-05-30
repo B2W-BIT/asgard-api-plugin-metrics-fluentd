@@ -188,20 +188,20 @@
          }
       },
       {
+        "config" : {
+          "password" : "xxxxxx",
+          "vhost" : "fluentd",
+          "user" : "fluentd",
+          "@id" : "app-logs-out-rabbitmq",
+          "exchange" : "fluentd-logs",
+          "host" : "asgard-log-ingest-rabbitmq.service.sieve.com.br",
+          "passive" : "true",
+          "port" : "5672",
+          "@type" : "amqp"
+        },
          "retry" : {},
          "output_plugin" : true,
          "buffer_queue_length" : 0,
-         "config" : {
-            "password" : "xxxxxx",
-            "vhost" : "fluentd",
-            "user" : "fluentd",
-            "@id" : "app-logs-out-rabbitmq",
-            "exchange" : "fluentd-logs",
-            "host" : "asgard-log-ingest-rabbitmq.service.sieve.com.br",
-            "passive" : "true",
-            "port" : "5672",
-            "@type" : "amqp"
-         },
          "retry_count" : 0,
          "buffer_total_queued_size" : 173834,
          "plugin_id" : "app-logs-out-rabbitmq",

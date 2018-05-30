@@ -6,7 +6,7 @@ here = path.abspath(path.dirname(__file__))
 
 setup(
     name='asgard-api-plugin-metrics-fluentd',
-    version='0.1.0',
+    version='0.1.0-rc2',
 
     description='Asgard API endpoints to get Fluentd metrics',
     long_description="Plugin para a Asgard API e que fornece métricas do cluster de Fluentd",
@@ -20,10 +20,17 @@ setup(
     ],
 
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
+    install_requires = [
+        "asgard-api-sdk==0.2.0",
+        "python-dateutil==2.7.3",
+        "requests>=2.0.0",
+        "freezegun==0.3.10",
+        "pytz==2018.04",
+    ],
 
     entry_points={
         'asgard_api_metrics_mountpoint': [
-            'init = fluentdmetrics.blueprint:asgard_api_plugin_init',
+            'init = fluentdmetrics.plugin:asgard_api_plugin_init',
         ],
     },
 )
