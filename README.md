@@ -28,13 +28,13 @@ de monitoring do fluentd, então fará o acesso em http://<IP>:<PORTA>/api/plugi
       {
         "retry_count_<IP>": <N>,
         "buffer_queue_length_<IP>": <N>,
+        "buffer_total_queued_size_<IP>: <N>,
         "retry_start_min_<IP>: -<N>,
         "retry_next_min_<IP>: +<N>,
-        "buffer_total_queued_size_<IP>: <N>,
       }
       ```
 * /retry_count/<plugin-id>
-    Retorna os dados sumarizados para todo so nós do fluentd.
+    Retorna os dados sumarizados para todos os nós do fluentd.
     Os campos numéricos serão somados: `buffer_queue_length`, `buffer_total_queued_size`, `retry_count`. 
     Exemplo de resposta:
     ```
@@ -42,11 +42,9 @@ de monitoring do fluentd, então fará o acesso em http://<IP>:<PORTA>/api/plugi
 
     Response:
     {
+      "retry_count": each(<IP>).sum(retry_count),
       "buffer_queue_length": each(<IP>).sum(buffer_queue_length),
       "buffer_total_queued_size": each(<IP>).sum(buffer_total_queued_size),
-      "retry_count": each(<IP>).sum(retry_count),
-      "retry_start_min: each(<IP>).max(now - retry_start), # Pegamos o plugin começou a falhar primeiro.
-      "retry_next_min_<IP>: each(<IP>).min(retry_next - now), # Pegamos o plugin que será o primeiro a re-tentar.
     }
     ```
 
