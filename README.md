@@ -2,20 +2,14 @@
 
 ## Changelog
 
- * 0.1.0
-    - Implementação inicial
-
-## Env vars
-* Todas as env são lidas pela `asgard-api-sdk`. As que são necessária aqui são 
-as que possuem sufixo `_FLUENTD_ADDRESS_<N>`. Mais detalhes na doc da `asgard-api-sdk`.
+  [Changelog](./CHANGELOG.md)
 
 
-* HOLLOWMAN_FLUENTD_ADDRESS_N = IP:PORTA
+# Descrição
 
-Importante ter o IP e PORTA no endereço do fluentd. Esse código assume que esse endereço é a api
-de monitoring do fluentd, então fará o acesso em http://<IP>:<PORTA>/api/plugins.json
+Plugin para a Asgard API que expõe métricas sobre um cluster de Fluentd.
 
-## Routes:
+## Endpoints implementados por esse plugin
 
 * /plugins/<plugin-id>
     Retorna um JSON contendo os campos desse plugin (<plugin-id>) que foram buscados em todos os nós do fluentd.
@@ -48,6 +42,23 @@ de monitoring do fluentd, então fará o acesso em http://<IP>:<PORTA>/api/plugi
     }
     ```
 
+## Instalação desse plugin em sua Asgard API
+
+Basta colocar o pacote python `asgard-api-plugin-metrics-fluentd` como dependencia do seu deploy da Asgard API.
+
+## Detalhes sobre a interface de plugin da Asgard API
+
+Esse passo a passo está detalhado no repositório da [asgard-api-plugin-metrics-mesos](https://github.com/B2W-BIT/asgard-api-plugin-metrics-mesos)
+
+## Env vars
+* Todas as env são lidas pela `asgard-api-sdk`. As que são necessária aqui são 
+as que possuem sufixo `_FLUENTD_ADDRESS_<N>`. Mais detalhes na doc da `asgard-api-sdk`.
+
+
+* HOLLOWMAN_FLUENTD_ADDRESS_N = IP:PORTA
+
+Importante ter o IP e PORTA no endereço do fluentd. Esse código assume que esse endereço é a api
+de monitoring do fluentd, então fará o acesso em http://<IP>:<PORTA>/api/plugins.json
 
 ## Running tests:
-`$ py.test --cov=fluentdmetrics --cov-report term-missing -v -s`
+`$ PYTHONPATH=. py.test --cov=./ --cov-report term-missing -v -s`
