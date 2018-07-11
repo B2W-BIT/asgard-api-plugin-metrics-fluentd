@@ -14,19 +14,19 @@ Plugin para a Asgard API que expõe métricas sobre um cluster de Fluentd.
 * /plugins/<plugin-id>
     Retorna um JSON contendo os campos desse plugin (<plugin-id>) que foram buscados em todos os nós do fluentd.
     Apresentamos os valores individuais, usando o IP do nó com sufixo da chave.
-      Exemplo de resposta:
-      ```
-      GET /plugins/<plugin_id>
+    Exemplo de resposta:
+    ```
+    GET /plugins/<plugin_id>
 
-      Response:
-      {
-        "retry_count_<IP>": <N>,
-        "buffer_queue_length_<IP>": <N>,
-        "buffer_total_queued_size_<IP>: <N>,
-        "retry_start_min_<IP>: -<N>,
-        "retry_next_min_<IP>: +<N>,
-      }
-      ```
+    Response:
+    {
+      "retry_count_<IP>": <N>,
+      "buffer_queue_length_<IP>": <N>,
+      "buffer_total_queued_size_<IP>: <N>,
+      "retry_start_min_<IP>: -<N>,
+      "retry_next_min_<IP>: +<N>,
+    }
+    ```
 * /retry_count/<plugin-id>
     Retorna os dados sumarizados para todos os nós do fluentd.
     Os campos numéricos serão somados: `buffer_queue_length`, `buffer_total_queued_size`, `retry_count`. 
