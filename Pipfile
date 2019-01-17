@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+python-dateutil = "==2.7.3"
+requests = "==2.13.0"
+pytz = "==2018.4"
+Flask = "==0.12"
+
+[dev-packages]
+ipdb = "==0.10.3"
+pytest = "==3.0.7"
+pytest-cov = "==2.4.0"
+coverage = "==4.3.4"
+responses = "==0.8.1"
+freezegun = "==0.3.10"
+asgard-api = {editable = true, path = "./../asgard-api"}
+black = "==18.9b0"
+asgard-api-plugin-metrics-fluentd = {editable = true, path = "."}
+
+[requires]
+python_version = "3.6"
