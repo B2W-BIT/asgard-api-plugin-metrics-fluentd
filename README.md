@@ -61,4 +61,9 @@ Importante ter o IP e PORTA no endereço do fluentd. Esse código assume que ess
 de monitoring do fluentd, então fará o acesso em http://<IP>:<PORTA>/api/plugins.json
 
 ## Running tests:
-`$ PYTHONPATH=. py.test --cov=./ --cov-report term-missing -v -s`
+
+É necessário ter uma cópia da asgard-api, clonada na mesma pasta conde está esse cópdigo.
+
+`$ pipenv install --dev`
+`$ pipenv run py.test --cov=./ --cov-report term-missing -v -s`
+
