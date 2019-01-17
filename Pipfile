@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-asgard-api-sdk = "==0.2.0"
 python-dateutil = "==2.7.3"
 requests = "==2.13.0"
 pytz = "==2018.4"
@@ -17,6 +16,7 @@ pytest-cov = "==2.4.0"
 coverage = "==4.3.4"
 responses = "==0.8.1"
 freezegun = "==0.3.10"
+asgard-api = {editable = true, path = "./../asgard-api"}
 
 [requires]
 python_version = "3.6"

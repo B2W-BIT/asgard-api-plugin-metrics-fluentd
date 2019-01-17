@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f8f0d849240b472eceb1bb0b32dc459eda258a26f7e1b33f1698f885a48bf50e"
+            "sha256": "a2c17770eae807c7cced8844c361293fc6e430cfbae10c4a78c2ce72f141d32f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,13 +16,6 @@
         ]
     },
     "default": {
-        "asgard-api-sdk": {
-            "hashes": [
-                "sha256:9c1f86f1417d21df2067c5de7bfc2e1fac9b4034362d6fffff8f64a7641d9e50"
-            ],
-            "index": "pypi",
-            "version": "==0.2.0"
-        },
         "click": {
             "hashes": [
                 "sha256:2335065e6395b9e67ca716de5f7526736bfa6ceead690adf616d925bdc622b13",
@@ -125,6 +118,10 @@
         }
     },
     "develop": {
+        "asgard-api": {
+            "editable": true,
+            "path": "./../asgard-api"
+        },
         "backcall": {
             "hashes": [
                 "sha256:38ecd85be2c1e78f77fd91700c76e14667dc21e2713b63876c0eb901196e01e4",
