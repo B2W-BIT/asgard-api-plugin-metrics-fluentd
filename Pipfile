@@ -18,6 +18,7 @@ responses = "==0.8.1"
 freezegun = "==0.3.10"
 asgard-api = {editable = true, path = "./../asgard-api"}
 black = "==18.9b0"
+asgard-api-plugin-metrics-fluentd = {editable = true, path = "."}
 
 [requires]
 python_version = "3.6"

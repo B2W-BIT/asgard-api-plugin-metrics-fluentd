@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "adbe375268d91ce922f976e45da614d5726bc2b3325035c2a6f6f60ba1cc460c"
+            "sha256": "2f0745dcabd42166768b5fb1daa6a839e79ca2ef174a31230d00442b11cd63a9"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -128,6 +128,10 @@
         "asgard-api": {
             "editable": true,
             "path": "./../asgard-api"
+        },
+        "asgard-api-plugin-metrics-fluentd": {
+            "editable": true,
+            "path": "."
         },
         "attrs": {
             "hashes": [
