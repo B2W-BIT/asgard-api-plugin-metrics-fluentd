@@ -1,4 +1,7 @@
-from setuptools import setup, find_packages  # Always prefer setuptools over distutils
+from setuptools import (
+    setup,
+    find_packages,
+)  # Always prefer setuptools over distutils
 from codecs import open  # To use a consistent encoding
 from os import path
 
@@ -16,6 +19,7 @@ setup(
     license="MIT",
     classifiers=["Programming Language :: Python :: 3.6"],
     packages=find_packages(exclude=["contrib", "docs", "tests*"]),
+    install_requires=["python-dateutil==2.8.0"],
     entry_points={
         "asgard_api_metrics_mountpoint": [
             "init = fluentdmetrics.plugin:asgard_api_plugin_init"
